@@ -1,0 +1,58 @@
+﻿@model IEnumerable<MyFinalProject.ViewModels.HangHoaVM>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MaHh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TenHh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hinh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Loai)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NhaCungCap)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaHh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenHh)
+                </td>
+                <td>
+                    <img src="~/Hinh/HangHoa/@item.Hinh" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Loai)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NhaCungCap)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GiaBan)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
