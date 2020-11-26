@@ -27,6 +27,7 @@ namespace MyFinalProject
         {
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddDbContext<MyStore2020Context>(option => option.UseSqlServer(Configuration.GetConnectionString("MyStore2020")));
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,7 +45,7 @@ namespace MyFinalProject
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();
