@@ -26,24 +26,27 @@
                 <h2 class="text-black">@Model.TenHh</h2>
                 <p>@Model.MoTaDonVi</p>
                 <p class="mb-4">@Model.MoTa</p>
-                <p><strong class="text-primary h4">
-                    @Model.DonGia.Value.ToVnd()
-                    </strong></p>
-                
-                <div class="mb-5">
-                    <div class="input-group mb-3" style="max-width: 120px;">
-                        <div class="input-group-prepend">
-                            <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
+                <p>
+                    <strong class="text-primary h4">
+                        @Model.DonGia.Value.ToVnd()
+                    </strong>
+                </p>
+
+                <form asp-action="AddToCart" asp-controller="Cart" asp-route-id="@Model.MaHh">
+                    <div class="mb-5">
+                        <div class="input-group mb-3" style="max-width: 120px;">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
+                            </div>
+                            <input type="text" class="form-control text-center" value="1" name="SoLuong" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
+                            </div>
                         </div>
-                        <input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
-                        </div>
+
                     </div>
-
-                </div>
-                <p><a href="cart.html" class="buy-now btn btn-sm btn-primary">Add To Cart</a></p>
-
+                    <p><button class="buy-now btn btn-sm btn-primary">Add To Cart</button></p>
+                </form>
             </div>
         </div>
     </div>
