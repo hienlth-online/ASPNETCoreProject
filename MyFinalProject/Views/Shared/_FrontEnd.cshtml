@@ -47,7 +47,17 @@
                                     <li>
                                         <a href="cart.html" class="site-cart">
                                             <span class="icon icon-shopping_cart"></span>
-                                            <span class="count">2</span>
+                                            <span class="count" id="cart_count">
+                                                @using HienlthOnline.Helpers
+                                                @{
+                                                    var data = Context.Session.Get<List<CartItem>>("GioHang");
+                                                    if (data == null)
+                                                    {
+                                                        data = new List<CartItem>();
+                                                    }
+                                                }
+                                                @(data.Sum(c => c.SoLuong))
+                                            </span>
                                         </a>
                                     </li>
                                     <li class="d-inline-block d-md-none ml-md-0"><a href="#" class="site-menu-toggle js-menu-toggle"><span class="icon-menu"></span></a></li>
@@ -116,5 +126,6 @@
     <script src="~/shoppers/js/jquery.magnific-popup.min.js"></script>
     <script src="~/shoppers/js/aos.js"></script>
     <script src="~/shoppers/js/main.js"></script>
+    @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -36,7 +36,7 @@ namespace MyFinalProject.Controllers
             return View(Carts);
         }
 
-        public IActionResult AddToCart(int id, int SoLuong)
+        public IActionResult AddToCart(int id, int SoLuong, string type = "Normal")
         {
             var myCart = Carts;
             var item = myCart.SingleOrDefault(p => p.MaHh == id);
@@ -60,6 +60,12 @@ namespace MyFinalProject.Controllers
             }
             HttpContext.Session.Set("GioHang", myCart);
 
+            if(type == "ajax")
+            {
+                return Json(new { 
+                    SoLuong = Carts.Sum(c => c.SoLuong)
+                });
+            }
             return RedirectToAction("Index");
         }
     }
