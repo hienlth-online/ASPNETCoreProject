@@ -18,3 +18,8 @@ Project được viết bằng ASP.NET Core 3.1, SQL Server, Entity Framework Co
 * Video: https://www.youtube.com/watch?v=UbAgX4k5y2M
 * Start code from: https://github.com/hienlth-online/ASPNETCoreProject/tree/2_SimpleCart_End
 * Finish (source code): https://github.com/hienlth-online/ASPNETCoreProject/tree/2_SimpleCart_Start
+
+## 3. Giỏ hàng AJAX
+* Video
+* Start:
+* End:
