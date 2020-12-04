@@ -88,11 +88,18 @@
                             </ul>
                         </li>
                         <li class="has-children">
-                            <a href="about.html">About</a>
+                            <a href="about.html">User @User.Identity.Name</a>
                             <ul class="dropdown">
-                                <li><a href="#">Menu One</a></li>
-                                <li><a href="#">Menu Two</a></li>
-                                <li><a href="#">Menu Three</a></li>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <li><a asp-action="Profile" asp-controller="KhachHang">Profile</a></li>
+                                    <li><a asp-action="Logout" asp-controller="KhachHang">Logout</a></li>
+                                }
+                                else
+                                {
+                                    <li><a asp-action="Login" asp-controller="KhachHang">Login</a></li>
+                                    <li><a asp-action="Regiter" asp-controller="KhachHang">Regiter</a></li>
+                                }
                             </ul>
                         </li>
                         <li class="active"><a href="shop.html">Shop</a></li>
