@@ -1,7 +1,9 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -9,7 +11,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using MyFinalProject.Entities;
+using MyFinalProject.Helpers;
+using MyFinalProject.Services;
 
 namespace MyFinalProject
 {
@@ -25,9 +30,30 @@ namespace MyFinalProject
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<ILoaiService, LoaiService>();
+
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddDbContext<MyStore2020Context>(option => option.UseSqlServer(Configuration.GetConnectionString("MyStore2020")));
             services.AddSession();
+
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+
+            var secretKey = Configuration["AppSettings:Secret"];
+            var secretKeyBytes = Encoding.UTF8.GetBytes(secretKey);
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(opt => {
+                    opt.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        //tự cấp token
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
+
+                        //cấu hình cho sinh token
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(secretKeyBytes)
+                    };
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,7 +73,7 @@ namespace MyFinalProject
             app.UseStaticFiles();
             app.UseSession();
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

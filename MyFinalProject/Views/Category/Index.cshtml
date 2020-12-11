@@ -1,0 +1,14 @@
+﻿@model IEnumerable<MyFinalProject.Entities.Loai>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_FrontEnd.cshtml";
+}
+
+<h1>Index</h1>
+@foreach(var lo in Model)
+{
+    <div>
+        @lo.MaLoai - @lo.TenLoai
+    </div>
+}
+
